@@ -11,7 +11,7 @@ load_dotenv()
 GITHUB_BASE = os.getenv('GITHUB_BASE')
 GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')  # Not directly used in this script but loaded for private repos if needed.
 TIMESTAMP = datetime.now().strftime("%d-%b-%y").lower()
-OUTPUT_CSV = os.path.join(GITHUB_BASE, f"repo-index_{TIMESTAMP}.csv")  # Write CSV to the base directory
+OUTPUT_CSV = f"repo-index_{TIMESTAMP}.csv"
 
 def get_remote_url(repo_path):
     """
@@ -57,7 +57,7 @@ def main():
     # Sort the data alphabetically by path
     repo_data.sort(key=lambda x: x[0])
 
-    # Write data to CSV in the base directory
+    # Write data to CSV
     with open(OUTPUT_CSV, mode='w', newline='', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(['path (relative to base)', 'remote repo url'])
